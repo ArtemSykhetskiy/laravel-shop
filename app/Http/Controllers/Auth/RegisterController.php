@@ -35,11 +35,9 @@ class RegisterController extends Controller
 
         event(new Registered($user));
 
-        Auth::login($user);
+        auth()->login($user);
 
-        return $request->wantsJson()
-            ? new JsonResponse([], 201)
-            : redirect(RouteServiceProvider::HOME);
+        return redirect('/')->with('success', "Account successfully registered.");
 
 
 

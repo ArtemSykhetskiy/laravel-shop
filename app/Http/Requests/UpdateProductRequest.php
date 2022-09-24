@@ -48,8 +48,8 @@ class UpdateProductRequest extends FormRequest
             'discount' => ['required', 'numeric', 'min:0', 'max:99'],
             'in_stock' => ['required', 'numeric', 'min:0'],
             'category_id' => ['required', 'numeric'],
-            'images.*' => ['image:png,jpg,jpeg'],
-//            'thumbnail' => ['nullable', 'image:png,jpg,jpeg']
+            'image.*' => ['image:png,jpg,jpeg'],
+            'thumbnail' => ['nullable', 'image:png,jpg,jpeg']
 
         ];
     }

@@ -27,7 +27,7 @@ class LoginController extends Controller
         $user = $request->validated();
         if(Auth::attempt($user)) {
             $request->session()->regenerate();
-            return redirect()->route('welcome');
+            return redirect()->route('home');
         }
 
         return redirect()->back()->with(['email' => 'Wrong password or email']);

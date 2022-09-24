@@ -192,6 +192,14 @@
                         <li><a class="dropdown-item" href="{{route('admin.categories.create')}}">Create category</a></li>
                     </ul>
                 </li>
+                <li class="nav-item active">
+                    <a href="{{route('admin.orders')}}">
+                        <i class="la la-dashboard"></i>
+                        <p>Orders</p>
+
+                    </a>
+                </li>
+
 
 
                 <li class="nav-item update-pro">

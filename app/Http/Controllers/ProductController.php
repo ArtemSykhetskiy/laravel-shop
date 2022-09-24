@@ -2,56 +2,48 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CreateProductRequest;
-use App\Http\Requests\UpdateProductRequest;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Spatie\QueryBuilder\AllowedFilter;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class ProductController extends Controller
 {
-
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::with('category')->paginate(10);
-        return view('admin/products/products', compact('products'));
+        $categories = Category::withCount('products')->get();
+
+        $products = QueryBuilder::for(Product::class)
+            ->allowedSorts('title', 'price')
+            ->paginate(12)
+            ->appends(request()->query());
+
+        if($request->has('from') || $request->has('to')){
+
+            $min_value = $request->input('from');
+            $max_value = $request->input('to');
+
+            if( $min_value === null){
+                $min_value = 0;
+            }
+
+            if($max_value === null){
+                $max_value = Product::max('price');
+            }
+
+            $products = Product::whereBetween('price', [$min_value, $max_value])->paginate(15);
+        }
+
+
+        return view('site/layouts/shop', compact('products', 'categories', 'request'));
     }
 
-
-    public function create()
+    public function show(Product $product)
     {
-        $categories = Category::all();
-        return view('admin/products/create', compact('categories'));
+        $products = Product::all()->take(5);
+
+        return view('site/layouts/single_product', compact('product', 'products'));
     }
 
-
-    public function store(CreateProductRequest $request)
-    {
-        $data = $request->validated();
-        $data['thumbnail'] = 'https://via.placeholder.com/640x480.png/00cc66?text=aut';
-       Product::create($data);
-
-       return redirect()->route('admin.products.index')->with('success', 'Product successfully added');
-    }
-
-    public function edit(Product $product)
-    {
-        $categories = Category::all();
-        return view('admin/products/edit', compact('product', 'categories'));
-    }
-
-    public function update(UpdateProductRequest $request, Product $product)
-    {
-        $data = $request->validated();
-        $product->update($data);
-
-        return redirect()->route('admin.products.index')->with('success', "The product {$product->title} was successfully updated!");
-    }
-
-    public function destroy(Product $product)
-    {
-        $product->delete();
-        return redirect()->route('admin.products.index')
-            ->with('success', "The product {$product->title} was successfully deleted!");
-    }
 }

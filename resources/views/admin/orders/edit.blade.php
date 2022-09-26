@@ -111,6 +111,12 @@
                                         <td>{{$product->pivot->single_price * $product->pivot->quantity}}</td>
                                     </tr>
                                 @endforeach
+                                <tr>
+                                    <td>Discount - {{\Gloudemans\Shoppingcart\Facades\Cart::instance('cart')->discount()}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Subtotal - {{\Gloudemans\Shoppingcart\Facades\Cart::instance('cart')->subtotal()}}</td>
+                                </tr>
                                 </tbody>
                             </table>
                         </div>

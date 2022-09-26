@@ -70,8 +70,7 @@
                     <li><a href="{{route('home')}}">Home</a> </li>
                     <li><a href="{{route('products')}}">Shop</a></li>
                     <li><a href="{{route('categories')}}">Categories</a></li>
-                    <li><a href="#">New Arrivals</a></li>
-                    <li><a href="contact.html">Contact</a></li>
+
                 </ul>
             </div>
         </nav>

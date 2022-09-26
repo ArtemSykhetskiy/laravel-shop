@@ -115,23 +115,6 @@
 
                 <div class="row mb-5">
                     <div class="col-md-12">
-                        <h2 class="h3 mb-3 text-black">Coupon Code</h2>
-                        <div class="p-3 p-lg-5 border">
-
-                            <label for="c_code" class="text-black mb-3">Enter your coupon code if you have one</label>
-                            <div class="input-group w-75">
-                                <input type="text" class="form-control" id="c_code" placeholder="Coupon Code" aria-label="Coupon Code" aria-describedby="button-addon2">
-                                <div class="input-group-append">
-                                    <button class="btn btn-primary btn-sm" type="button" id="button-addon2">Apply</button>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row mb-5">
-                    <div class="col-md-12">
                         <h2 class="h3 mb-3 text-black">Your Order</h2>
                         <div class="p-3 p-lg-5 border">
                             <table class="table site-block-order-table mb-5">
@@ -148,9 +131,10 @@
                                 </tr>
                                 @endforeach
                                 <tr>
-                                    <td class="text-black font-weight-bold"><strong>Cart Subtotal</strong></td>
-                                    <td class="text-black">{{Cart::subtotal()}}</td>
+                                    <td class="text-black font-weight-bold"><strong>Cart Discount</strong></td>
+                                    <td class="text-black">{{Cart::discount()}}</td>
                                 </tr>
+
                                 <tr>
                                     <td class="text-black font-weight-bold"><strong>Order Total</strong></td>
                                     <td class="text-black font-weight-bold"><strong>{{Cart::total()}}</strong></td>

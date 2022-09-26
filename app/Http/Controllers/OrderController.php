@@ -17,7 +17,7 @@ class OrderController extends Controller
 
         $data = array_merge($request->validated(), [
             'status_id' => $status->id,
-            'total' => Cart::instance('cart')->total(2, '.', ''),
+            'total' => Cart::instance('cart')->subtotal(2, '.', ''),
             'user_id' => $user->id
         ]);
 

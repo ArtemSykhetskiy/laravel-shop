@@ -54,6 +54,13 @@ Route::name('admin.')->prefix('admin')->middleware(['auth', 'admin'])->group(fun
     Route::put('order/{order}/edit', [\App\Http\Controllers\Admin\OrdersController::class, 'update'])->name('order.update');
     Route::get('orders/search', [\App\Http\Controllers\Admin\OrdersController::class, 'search'])->name('order.search');
 
+    Route::get('promocodes', [\App\Http\Controllers\Admin\PromocodeController::class, 'index'])->name('promocodes.index');
+    Route::get('promocodes/create', [\App\Http\Controllers\Admin\PromocodeController::class, 'create'])->name('promocodes.create');
+    Route::post('promocodes/store', [\App\Http\Controllers\Admin\PromocodeController::class, 'store'])->name('promocodes.store');
+    Route::get('promocodes/{promocode}', [\App\Http\Controllers\Admin\PromocodeController::class, 'show'])->name('promocodes.show');
+    Route::delete('promocodes/{promocode}', [\App\Http\Controllers\Admin\PromocodeController::class, 'destroy'])->name('promocodes.destroy');
+    Route::post('promocodes/apply', [\App\Http\Controllers\Admin\PromocodeController::class, 'apply'])->name('promocodes.apply');
+
 });
 
 Route::get('products', [\App\Http\Controllers\ProductController::class, 'index'])->name('products');
@@ -70,7 +77,7 @@ Route::post('cart/{product}/count', [\App\Http\Controllers\CartController::class
 Route::get('checkout', \App\Http\Controllers\CheckoutController::class)->name('checkout');
 
 Route::get('wishlist', [\App\Http\Controllers\WishesController::class, 'index'])->name('wishlist')->middleware('auth');
-Route::post('wishlist/{product}/add', [\App\Http\Controllers\WishesController::class, 'add'])->name('wishlist.add');
+Route::post('wishlist/{product}/add', [\App\Http\Controllers\WishesController::class, 'add'])->name('wishlist.add')->middleware('auth');
 Route::delete('wishlist/{product}/delete', [\App\Http\Controllers\WishesController::class, 'delete'])->name('wishlist.remove')->middleware('auth');
 
 Route::post('order/create', [\App\Http\Controllers\OrderController::class, 'create'])->name('order.create');

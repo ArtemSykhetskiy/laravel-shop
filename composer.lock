@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5ae5f88d222b15e8c1e2d05a111970ee",
+    "content-hash": "61b4f0342987e9baf46a7ad378c81703",
     "packages": [
         {
             "name": "brick/math",
@@ -5707,6 +5707,80 @@
                 "source": "https://github.com/webmozarts/assert/tree/1.11.0"
             },
             "time": "2022-06-03T18:03:27+00:00"
+        },
+        {
+            "name": "zgabievi/laravel-promocodes",
+            "version": "9.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zgabievi/laravel-promocodes.git",
+                "reference": "0022bd7ee9b47fb6ce8ddf310cff65778db58a92"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zgabievi/laravel-promocodes/zipball/0022bd7ee9b47fb6ce8ddf310cff65778db58a92",
+                "reference": "0022bd7ee9b47fb6ce8ddf310cff65778db58a92",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/broadcasting": "^9.0",
+                "illuminate/console": "^9.0",
+                "illuminate/container": "^9.0",
+                "illuminate/database": "^9.0",
+                "illuminate/queue": "^9.0",
+                "illuminate/support": "^9.0",
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "nunomaduro/larastan": "^2.0",
+                "orchestra/testbench": "^7.1",
+                "pestphp/pest": "^1.21",
+                "pestphp/pest-plugin-laravel": "^1.2",
+                "pestphp/pest-plugin-mock": "^1.0",
+                "phpunit/phpunit": "^9.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Zorb\\Promocodes\\PromocodesServiceProvider"
+                    ],
+                    "aliases": {
+                        "Promocodes": "Zorb\\Promocodes\\Facades\\Promocodes"
+                    }
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/helpers.php"
+                ],
+                "psr-4": {
+                    "Zorb\\Promocodes\\": "src/",
+                    "Zorb\\Promocodes\\Database\\Factories\\": "database/factories"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Zura Gabievi",
+                    "email": "zura.gabievi@email.com",
+                    "homepage": "https://github.com/zgabievi"
+                }
+            ],
+            "description": ":package_description",
+            "homepage": "https://github.com/zgabievi/laravel-promocodes",
+            "keywords": [
+                "laravel",
+                "promocodes"
+            ],
+            "support": {
+                "issues": "https://github.com/zgabievi/laravel-promocodes/issues",
+                "source": "https://github.com/zgabievi/laravel-promocodes/tree/9.1.0"
+            },
+            "time": "2022-07-11T15:28:29+00:00"
         }
     ],
     "packages-dev": [

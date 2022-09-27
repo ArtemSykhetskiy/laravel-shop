@@ -69,7 +69,7 @@ class PromocodeController extends Controller
     public function destroy(Promocode $promocode)
     {
         $promocode->delete();
-        return redirect()->route('admin.promocodes')->with('success', 'Promocode successfully deleted');
+        return redirect()->route('admin.promocodes.index')->with('success', 'Promocode successfully deleted');
     }
 
     public function apply(Request $request)

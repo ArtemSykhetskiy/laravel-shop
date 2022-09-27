@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\OrderRequest;
 use App\Http\Requests\OrderUpdateRequest;
 use App\Models\Order;
+use App\Notifications\OrderChanged;
 use Illuminate\Http\Request;
 
 class OrdersController extends Controller
@@ -26,7 +27,6 @@ class OrdersController extends Controller
     public function update(Order $order, OrderUpdateRequest $request)
     {
         $order->update($request->validated());
-
         return redirect()->route('admin.orders')->with('success', 'Order successfully updated');
     }
 

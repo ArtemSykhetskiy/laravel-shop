@@ -44,7 +44,8 @@ Route::group(['middleware' => ['auth']], function() {
 });
 
 Route::name('admin.')->prefix('admin')->middleware(['auth', 'admin'])->group(function (){
-    Route::get('dashboard', \App\Http\Controllers\Admin\DashboardController::class)->name('dashboard')->middleware('admin');
+    Route::get('dashboard', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard')->middleware('admin');
+    Route::post('markNotification', [\App\Http\Controllers\Admin\DashboardController::class, 'markNotification'])->name('markNotification');
 
     Route::resource('products', \App\Http\Controllers\Admin\ProductController::class)->except('show');
     Route::resource('categories', \App\Http\Controllers\Admin\CategoryController::class)->except('show');
@@ -61,6 +62,8 @@ Route::name('admin.')->prefix('admin')->middleware(['auth', 'admin'])->group(fun
     Route::delete('promocodes/{promocode}', [\App\Http\Controllers\Admin\PromocodeController::class, 'destroy'])->name('promocodes.destroy');
     Route::post('promocodes/apply', [\App\Http\Controllers\Admin\PromocodeController::class, 'apply'])->name('promocodes.apply');
 
+    Route::get('notifications', \App\Http\Controllers\Admin\NotificationController::class)->name('notifications');
+
 });
 
 Route::get('products', [\App\Http\Controllers\ProductController::class, 'index'])->name('products');
@@ -74,7 +77,7 @@ Route::post('cart/{product}', [\App\Http\Controllers\CartController::class, 'add
 Route::delete('cart', [\App\Http\Controllers\CartController::class, 'remove'])->name('cart.remove');
 Route::post('cart/{product}/count', [\App\Http\Controllers\CartController::class, 'countUpdate'])->name('cart.count.update');
 
-Route::get('checkout', \App\Http\Controllers\CheckoutController::class)->name('checkout');
+Route::get('checkout', \App\Http\Controllers\CheckoutController::class)->name('checkout')->middleware('auth');
 
 Route::get('wishlist', [\App\Http\Controllers\WishesController::class, 'index'])->name('wishlist')->middleware('auth');
 Route::post('wishlist/{product}/add', [\App\Http\Controllers\WishesController::class, 'add'])->name('wishlist.add')->middleware('auth');

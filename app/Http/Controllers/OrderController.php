@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\OrderAdminNotification;
 use App\Http\Requests\OrderRequest;
 use App\Models\Order;
 use App\Models\OrderStatus;
+use App\Notifications\OrderCreated;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 
@@ -23,6 +25,9 @@ class OrderController extends Controller
 
         $order = $user->orders()->create($data);
         $this->addProductsToOrder($order);
+        $user->notify(new OrderCreated($order));
+
+        event(new OrderAdminNotification($user));
 
         return redirect()->route('thankYou');
     }

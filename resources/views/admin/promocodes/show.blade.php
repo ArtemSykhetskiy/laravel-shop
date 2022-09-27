@@ -40,7 +40,7 @@
                                     <div class="form-group">
                                         <label for="exampleFormControlSelect1">User</label>
                                         <select class="form-control" id="exampleFormControlSelect1" name="user_id" disabled>
-                                            <option value="-1" selected>{{$promocode->user->name}}</option>
+                                            <option value="-1" selected>@if($promocode->user_id) {{$promocode->user->name}} @else All @endif</option>
                                         </select>
                                     </div>
 

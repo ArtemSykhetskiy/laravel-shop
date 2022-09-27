@@ -1,3 +1,5 @@
+<?php $notifications = auth()->user()->unreadNotifications ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -47,62 +49,42 @@
 {{--                            <a class="dropdown-item" href="#">Something else here</a>--}}
 {{--                        </div>--}}
 {{--                    </li>--}}
-{{--                    <li class="nav-item dropdown hidden-caret">--}}
-{{--                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--}}
-{{--                            <i class="la la-bell"></i>--}}
-{{--                            <span class="notification">3</span>--}}
-{{--                        </a>--}}
-{{--                        <ul class="dropdown-menu notif-box" aria-labelledby="navbarDropdown">--}}
-{{--                            <li>--}}
-{{--                                <div class="dropdown-title">You have 4 new notification</div>--}}
-{{--                            </li>--}}
-{{--                            <li>--}}
-{{--                                <div class="notif-center">--}}
-{{--                                    <a href="#">--}}
-{{--                                        <div class="notif-icon notif-primary"> <i class="la la-user-plus"></i> </div>--}}
-{{--                                        <div class="notif-content">--}}
-{{--												<span class="block">--}}
-{{--													New user registered--}}
-{{--												</span>--}}
-{{--                                            <span class="time">5 minutes ago</span>--}}
-{{--                                        </div>--}}
-{{--                                    </a>--}}
-{{--                                    <a href="#">--}}
-{{--                                        <div class="notif-icon notif-success"> <i class="la la-comment"></i> </div>--}}
-{{--                                        <div class="notif-content">--}}
-{{--												<span class="block">--}}
-{{--													Rahmad commented on Admin--}}
-{{--												</span>--}}
-{{--                                            <span class="time">12 minutes ago</span>--}}
-{{--                                        </div>--}}
-{{--                                    </a>--}}
-{{--                                    <a href="#">--}}
-{{--                                        <div class="notif-img">--}}
-{{--                                            <img src="{{asset('assets/img/profile2.jpg')}}" alt="Img Profile">--}}
-{{--                                        </div>--}}
-{{--                                        <div class="notif-content">--}}
-{{--												<span class="block">--}}
-{{--													Reza send messages to you--}}
-{{--												</span>--}}
-{{--                                            <span class="time">12 minutes ago</span>--}}
-{{--                                        </div>--}}
-{{--                                    </a>--}}
-{{--                                    <a href="#">--}}
-{{--                                        <div class="notif-icon notif-danger"> <i class="la la-heart"></i> </div>--}}
-{{--                                        <div class="notif-content">--}}
-{{--												<span class="block">--}}
-{{--													Farrah liked Admin--}}
-{{--												</span>--}}
-{{--                                            <span class="time">17 minutes ago</span>--}}
-{{--                                        </div>--}}
-{{--                                    </a>--}}
-{{--                                </div>--}}
-{{--                            </li>--}}
-{{--                            <li>--}}
-{{--                                <a class="see-all" href="javascript:void(0);"> <strong>See all notifications</strong> <i class="la la-angle-right"></i> </a>--}}
-{{--                            </li>--}}
-{{--                        </ul>--}}
-{{--                    </li>--}}
+                    <li class="nav-item dropdown hidden-caret">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="la la-bell"></i>
+                            <span class="notification">{{$notifications->count()}}</span>
+                        </a>
+                        <ul class="dropdown-menu notif-box" aria-labelledby="navbarDropdown">
+                            <li>
+                                <div class="dropdown-title">You have {{$notifications->count()}} new notification</div>
+                            </li>
+                            <li>
+                                <div class="notif-center">
+                                    @foreach ($notifications as $notification)
+                                        <form method="post" action="{{route('admin.markNotification')}}">
+                                            @csrf
+                                        <a href="#" class="closeNotification">
+                                            <div class="notif-icon notif-primary"> <i class="la la-user-plus"></i> </div>
+                                            <div class="notif-content">
+												<span class="block">
+													{{$notification->data['name']}}
+												</span>
+                                                <span class="time">New order</span>
+                                            </div>
+                                            <input name="id" value="{{$notification->id}}" hidden>
+                                            <button type="submit" style="z-index:999">Ok</button>
+                                        </a>
+                                        </form>
+                                    @endforeach
+
+
+                                </div>
+                            </li>
+                            <li>
+                                <a class="see-all" href="javascript:void(0);"> <strong>See all notifications</strong> <i class="la la-angle-right"></i> </a>
+                            </li>
+                        </ul>
+                    </li>
                     <li class="nav-item dropdown">
                         <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false"> <img src="{{asset('assets/img/profile.jpg')}}" alt="user-img" width="36" class="img-circle"><span >{{auth()->user()->name}}</span></span> </a>
                         <ul class="dropdown-menu dropdown-user">
@@ -196,6 +178,13 @@
                     <a href="{{route('admin.orders')}}">
                         <i class="la la-dashboard"></i>
                         <p>Orders</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('admin.notifications')}}">
+                        <i class="la la-bell"></i>
+                        <p>Notifications</p>
+                        <span class="notification" style="color: red">{{$notifications->count()}}</span>
                     </a>
                 </li>
                 <li class="nav-item dropdown">
